@@ -1,0 +1,28 @@
+# Supernan AI Intern - Video Dubbing Pipeline
+# Python >= 3.10 recommended (for TTS/Whisper)
+
+# Core
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# Step 1–2: Transcription
+openai-whisper>=20231117
+
+# Step 3: Translation (lightweight option; see README for IndicTrans2)
+transformers>=4.30.0
+sentencepiece>=0.1.99
+
+# Step 4: Voice cloning
+TTS>=0.22.0
+
+# Step 5: Lip-sync runs via Wav2Lip repo (see README)
+# No pip package; clone Rudrabha/Wav2Lip and install its requirements
+
+# Video/audio I/O
+ffmpeg-python>=0.2.0
+pydub>=0.25.1
+
+# Utilities
+tqdm>=4.65.0
+requests>=2.28.0
+gdown>=4.7.0

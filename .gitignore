@@ -1,0 +1,29 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Work dir (intermediates and outputs)
+workdir/
+*.mp4
+*.wav
+*.mp3
+
+# Wav2Lip (Keep code/patches, ignore large models)
+!Wav2Lip/
+Wav2Lip/checkpoints/
+Wav2Lip/temp/
+Wav2Lip/results/
+Wav2Lip/__pycache__/
+
+# IDE / OS
+.idea/
+.DS_Store
+*.swp
+
+# Downloaded source video
+source_video.mp4
