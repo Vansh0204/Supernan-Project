@@ -42,6 +42,15 @@ def run(cmd: list[str], check: bool = True, **kwargs) -> subprocess.CompletedPro
     return r
 
 
+def clear_memory():
+    """Force garbage collection and clear GPU cache to prevent OOM."""
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+
+# -----------------------------------------------------------------------------
+# Step 0: Ingest – download or use local video; extract segment
 # -----------------------------------------------------------------------------
 
 
@@ -179,6 +188,7 @@ def _detect_lang_from_audio(audio_path: str, model_size: str = "base") -> str:
     print(f"  Audio detected language: {best_lang} (avg confidence: {best_score:.1%})")
     
     del model
+    clear_memory()
     return best_lang
 
 
@@ -273,6 +283,7 @@ def _transcribe_kannada(audio_path: str, work_dir: str) -> str:
         print(f"  Kannada ASR output: {text[:200]}..." if len(text) > 200 else f"  Kannada ASR output: {text}")
         
         del pipe
+        clear_memory()
         return text
     except Exception as e:
         print(f"  vasista22/whisper-kannada-medium failed ({e}). Falling back to standard Whisper...")
@@ -309,6 +320,7 @@ def _transcribe_generic(audio_path: str, source_lang: str, model_size: str = "me
         text = result["text"].strip()
     
     del model
+    clear_memory()
     return text
 
 
@@ -347,6 +359,7 @@ def translate_to_hindi(text: str, work_dir: str, source_lang: str = "en") -> str
     print(f"  Hindi text: {hindi[:200]}..." if len(hindi) > 200 else f"  Hindi text: {hindi}")
 
     del pipe
+    clear_memory()
     Path(work_dir).joinpath("translation_hi.txt").write_text(hindi, encoding="utf-8")
     return hindi
 
@@ -400,6 +413,7 @@ def generate_hindi_audio(
             language="hi",
         )
         del tts
+        clear_memory()
         return out_path
 
 
