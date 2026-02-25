@@ -27,3 +27,6 @@ Wav2Lip/__pycache__/
 
 # Downloaded source video
 source_video.mp4
+
+# Local documentation (private)
+CODE_EXPLAINED.md
